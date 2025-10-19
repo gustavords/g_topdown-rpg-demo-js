@@ -4,6 +4,17 @@
     box-sizing: border-box;
 }
 
-#test{
- color: red;
+html, body{
+    overflow: hidden;
+    image-rendering: pixelated;
+}
+
+#game-canvas{
+    width: 100%;
+    background-color: blue;
+}
+
+img{
+    width: 100px;
+    height: 100px;
 }
