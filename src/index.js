@@ -1,34 +1,28 @@
 import "./styles.css";
-import { fuck } from "./sprites/resources";
-import fuckyou from "./fuck.png";
+import { resources } from "./resources.js";
 
 
 const canvas = document.querySelector( `#game-canvas` );
 const ctx = canvas.getContext( `2d` );
 
-// const draw = () =>
-// {
-//   // const sky = resources.images.sky;
-//   // if ( sky.isLoaded )
-//   // {
-//   //   ctx.drawImage( sky.image, 0, 0 );
-//   // }
+const draw = () =>
+{
+  const sky = resources.images.sky;
+  if ( !sky.isLoaded )
+  {
+    ctx.drawImage( sky.image, 0, 0 );
+  }
 
-//   // const img = new Image();
-//   // img.src = sky;
-//   // ctx.drawImage( img, 0, 0 );
-// }
+  const ground = resources.images.ground;
+  if ( !ground.isLoaded )
+  {
+    ctx.drawImage( ground.image, 0, 0 );
+  }
+}
 
-console.log( fuck );
-const img = new Image();
-img.src = fuckyou;
-ctx.drawImage( img, 0, 0 );
 
-document.body.appendChild(img);
+setInterval( () =>
+{
+  draw();
 
-// setInterval( () =>
-// {
-//   console.log(`draw`);
-//   draw();
-
-// }, 300 );
+}, 300 );
