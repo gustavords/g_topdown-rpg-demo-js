@@ -3,25 +3,25 @@ import groundSprite from "./sprites/ground.png";
 import heroSprite from "./sprites/hero-sheet.png";
 import shadowSprite from "./sprites/shadow.png";
 
-const sky = new Image();
-const ground = new Image();
-const hero = new Image();
-const shadow = new Image();
+// const sky = new Image();
+// const ground = new Image();
+// const hero = new Image();
+// const shadow = new Image();
 
-sky.src = skySprite;
-ground.src = groundSprite;
-hero.src = heroSprite;
-shadow.src = shadowSprite;
+// sky.src = skySprite;
+// ground.src = groundSprite;
+// hero.src = heroSprite;
+// shadow.src = shadowSprite;
 
 class Resources
 {
   constructor ()
   {
     this.toLoad = {
-      sky: sky.src,
-      ground: ground.src,
-      hero: hero.src,
-      shadow: shadow.src,
+      sky: skySprite,
+      ground: groundSprite,
+      hero: heroSprite,
+      shadow: shadowSprite,
     }
 
     //bucket of images
@@ -31,14 +31,19 @@ class Resources
     {
       const img = new Image();
       img.src = this.toLoad[ key ];
+      
       this.images[ key ] = {
         image: img,
         isLoaded: false,
       }
-      img.onLoad = () =>
+      img.onload = () =>
       {
         this.images[ key ].isLoaded = true;
+        // console.log( `++++++here` );
+
       }
+      // console.log(`-----here`);
+      // alert(window.onload)
     } );
   }
 }

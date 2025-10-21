@@ -23,29 +23,32 @@ export class Sprite
     this.buildFrameMap();
   }
 
+  // test = 0;
   buildFrameMap ()
   {
     let frameCount = 0;
     for ( let v = 0; v < this.vFrames; v++ )
     {
+      // console.log(this.vFrames)
       for ( let h = 0; h < this.hFrames; h++ )
       {
-        // console.log( `frame`, h, v );
+        console.log( `frame: `, h, v )
+        // console.log(`frameCount: ${frameCount} |`, frameCount);
         this.frameMap.set(
           frameCount,
           new Vector2( this.frameSize.x * h, this.frameSize.y * v ),
-
         );
-        frameCount++;
-
+        frameCount += 1;
       }
     }
+    console.log( `--------------here-> `, this.vFrames );
+
   }
 
   drawImage ( ctx, x, y )
   {
     // console.log( this.resource.isLoaded );
-    // if ( this.resource.isLoaded ) { return; }
+    if ( !this.resource.isLoaded ) { return; }
 
     //find correct sprite sheet
     let frameCoordX = 0;
@@ -67,8 +70,8 @@ export class Sprite
       frameCoordY, //Top Y of frame
       frameSizeX, //how much to crop from sprite sheet
       frameSizeY, //how much to crop from sprite sheet
-      y, //where on canvas
       x, //where on canvas
+      y, //where on canvas
       frameSizeX * this.scale, //how large to scale is it
       frameSizeY * this.scale  //how large to scale is it
     )
