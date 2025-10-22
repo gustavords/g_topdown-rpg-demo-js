@@ -29,11 +29,9 @@ export class Sprite
     let frameCount = 0;
     for ( let v = 0; v < this.vFrames; v++ )
     {
-      // console.log(this.vFrames)
       for ( let h = 0; h < this.hFrames; h++ )
       {
-        console.log( `frame: `, h, v )
-        // console.log(`frameCount: ${frameCount} |`, frameCount);
+        // console.log( `frame: `, h, v );
         this.frameMap.set(
           frameCount,
           new Vector2( this.frameSize.x * h, this.frameSize.y * v ),
@@ -41,13 +39,12 @@ export class Sprite
         frameCount += 1;
       }
     }
-    console.log( `--------------here-> `, this.vFrames );
+    console.log( `--------vFrames------here-> `, this.vFrames );
 
   }
 
   drawImage ( ctx, x, y )
   {
-    // console.log( this.resource.isLoaded );
     if ( !this.resource.isLoaded ) { return; }
 
     //find correct sprite sheet

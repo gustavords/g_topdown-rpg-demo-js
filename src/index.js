@@ -2,6 +2,8 @@ import "./styles.css";
 import { resources } from "./resources.js";
 import { Sprite } from "./sprite.js";
 import { Vector2 } from "./vector2.js";
+import { GameLoop } from "./gameloop.js";
+import { DOWN, Input, LEFT, RIGHT, UP } from "./input.js";
 
 const canvas = document.querySelector( `#game-canvas` );
 const ctx = canvas.getContext( `2d` );
@@ -28,44 +30,65 @@ const shadowSprite = new Sprite( {
   frameSize: new Vector2( 32, 32 )
 } )
 
-// // const heroPos = new Vector2( 16 * 4, 16 * 5.5 );
-// // heroSprite.drawImage( ctx, heroPos.x, heroPos.y );
-// // const heroOffset = new Vector2( -31, 7 );
-
 const heroPos = new Vector2( 16 * 6, 16 * 5 );
-const heroOffset = new Vector2( -8, -21 );
-const heroPosX = heroPos.x + heroOffset.x;
-const heroPosY = heroPos.y + 1 + heroOffset.y;
+const input = new Input();
+
+const update = () =>
+{
+  //updating entities in the game
+  // heroSprite.frame += 1;
+  // heroPos.x += 1;
+
+  console.log( input.direction );
+  if ( input.direction === UP )
+  {
+    heroSprite.frame = 6;
+    heroPos.y--;
+  }
+  if ( input.direction === DOWN )
+  {
+    heroSprite.frame = 1;
+    heroPos.y++;
+  }
+  if ( input.direction === LEFT )
+  {
+    heroSprite.frame = 9;
+    heroPos.x--;
+  }
+  if ( input.direction === RIGHT )
+  {
+    heroSprite.frame = 3;
+    heroPos.x++;
+  }
+
+}
 
 const draw = () =>
 {
 
-  // ctx.clearRect(0,0, canvas.width, canvas.height);
-  // const sky = resources.images.sky;
-  // console.log( sky.isLoaded );
-  // console.log( sky.image.src );
-  // if(sky.isLoaded){
-  //   ctx.drawImage(sky.image, 0, 0);
-  // }
-
-
   skySprite.drawImage( ctx, 0, 0 );
   groundSprite.drawImage( ctx, 0, 0 );
 
+
   //to move position of where sprite is cut
+  const heroOffset = new Vector2( -8, -21 );
+  const heroPosX = heroPos.x + heroOffset.x;
+  const heroPosY = heroPos.y + 1 + heroOffset.y;
 
-  // console.log( heroSprite.frame );
-
-  shadowSprite.drawImage(ctx, heroPosX, heroPosY)
+  shadowSprite.drawImage( ctx, heroPosX, heroPosY )
   heroSprite.drawImage( ctx, heroPosX, heroPosY );
 
 }
 
 
 
-setInterval( () =>
-{
-  heroSprite.frame += 1;
-  draw();
+// setInterval( () =>
+// {
+//   heroSprite.frame += 1;
+//   draw();
 
-}, 300 );
+// }, 300 );
+
+const gameLoop = new GameLoop( update, draw );
+
+gameLoop.start();
